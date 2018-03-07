@@ -296,7 +296,7 @@ def check_python_lint(repo_root, staged_files, pylint_file):
     return True
 
 
-def linter_check(repo_root, linter_subfolder):
+def linter_check(repo_root, linter_subfolder, check_all=None):
   """ Main pre-commit function for calling code checking script. """
 
   cpplint_file = repo_root + "/" + linter_subfolder + "/cpplint.py"
@@ -309,7 +309,15 @@ def linter_check(repo_root, linter_subfolder):
   print("Found pylint file at: {}".format(pylint_file))
 
   # Run checks
-  staged_files = get_staged_files()
+  if check_all is not None:
+    check_dir = os.path.join(repo_root, check_all)
+    print("Checking all files in %s"%check_dir)
+    staged_files = []
+    for root, directories, filenames in os.walk(check_dir):
+      for filename in filenames:
+        staged_files.append(os.path.join(root,filename))
+  else:
+    staged_files = get_staged_files()
 
   if len(staged_files) == 0:
     print("\n")
@@ -321,7 +329,7 @@ def linter_check(repo_root, linter_subfolder):
   # Load ascii art.
   ascii_art = imp.load_source('ascii_art', ascii_art_file)
 
-  if check_commit_against_master(repo_root):
+  if check_commit_against_master(repo_root) and check_all is None:
     print(ascii_art.AsciiArt.grumpy_cat)
     exit(1)
 

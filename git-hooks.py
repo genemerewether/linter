@@ -2,6 +2,7 @@
 
 import subprocess
 import sys
+import os
 
 
 def run_command_in_folder(command, folder):
@@ -41,7 +42,9 @@ def main():
 
     import linter
 
-    linter.linter_check(repo_root, linter_subfolder)
+    linter.linter_check(repo_root, linter_subfolder,
+                        os.environ['LINTER_CHECK_ALL'] if "LINTER_CHECK_ALL" in os.environ else None)
+
 
 
 if __name__ == "__main__":
