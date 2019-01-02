@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 
 # Disable pylint invalid module name complaint.
@@ -299,7 +299,7 @@ def check_python_lint(repo_root, staged_files, pylint_file):
 def linter_check(repo_root, linter_subfolder, check_all=None):
   """ Main pre-commit function for calling code checking script. """
 
-  cpplint_file = repo_root + "/" + linter_subfolder + "/cpplint.py"
+  cpplint_file = repo_root + "/" + linter_subfolder + "/default/modified_cpplint.py"
   pylint_file = repo_root + "/" + linter_subfolder + "/pylint.rc"
   ascii_art_file = repo_root + "/" + linter_subfolder + "/ascii_art.py"
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 # Disable pylint filename and missing module member complaints.
 # pylint: disable=C0103,E1101
 
